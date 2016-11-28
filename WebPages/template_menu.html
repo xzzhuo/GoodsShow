@@ -20,12 +20,19 @@
             	<li><a href="#"><i class="fa fa-user fa-fw"></i> ${current_name!current_account!""}</a>
             	</li>
             	<li class="divider"></li>
+<#if isAnonymous>
+                <li><a href="login.html?act=menu_login"><i class="fa fa-sign-out fa-fw"></i> ${LANG["lang_sign_in"]}</a>
+                </li>
+<#else>
                 <li>
                 	<a href="account_change_password.html?act=menu_change_password"><i class="fa fa-key fa-fw"></i> ${LANG["lang_account_change_password"]}</a>
                 </li>
                 <li class="divider"></li>
-                <li><a href="login.html?act=menu_sign_out"><i class="fa fa-sign-out fa-fw"></i> ${LANG["lang_sign_out"]}</a>
+                <li><a href="login.html?act=menu_login"><i class="fa fa-sign-in fa-fw"></i> ${LANG["lang_change_user"]}</a>
                 </li>
+                <li><a href="main_page.html?act=menu_sign_out"><i class="fa fa-sign-out fa-fw"></i> ${LANG["lang_sign_out"]}</a>
+                </li>
+</#if>
             </ul>
             <!-- /.dropdown-user -->
         </li>
@@ -54,9 +61,11 @@
                 <li>
                     <a href="#"><i class="fa fa-files-o fa-fw"></i> ${LANG["lang_system_manage"]}<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+<#if isManager>
                         <li>
                             <a href="account_list.html?act=menu_show_account_list">${LANG["lang_account_manage"]}</a>
                         </li>
+</#if>
                         <li>
                             <a href="system_info.html?act=menu_show_system_info">${LANG["lang_system_info"]}</a>
                         </li>

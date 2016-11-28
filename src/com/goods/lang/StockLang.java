@@ -134,6 +134,9 @@ class StockLang {
 		// page title
 		addNewSource("lang_main_page",			"Main Page",	"商品展示");
 		
+		addNewSource("lang_change_user",		"Change User",	"切换用户");
+		
+		
 		////////////////////////////////////////////////////////////////////////////////
 		// error information
 		

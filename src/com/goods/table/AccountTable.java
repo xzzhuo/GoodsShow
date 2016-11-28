@@ -512,4 +512,28 @@ public class AccountTable extends BaseTable {
 		
 		return this.updateData(account, value);
 	}
+
+	public AccountData createAnonymous(String account, String lang) {
+		AccountData data = new AccountData();
+		
+		if (account == null || account.isEmpty())
+		{
+			account = this.makeRandCode();
+		}
+		
+		data.setAccount(account);
+		data.setUuid("");
+		data.setPassword("");
+		data.setCode("");
+		data.setToken("");
+		data.setType(AccountType.ANONYMOUS.name());
+		data.setName("Anonymous");
+		
+		if (lang != null)
+		{
+			data.setLanguage(lang);
+		}
+
+		return data;
+	}
 }

@@ -32,6 +32,8 @@ public class GoodsConfig implements INetConfig {
 	private String mTempPath = "temp";
 	private String mLanTypeName = LangType.LANG_CHS.name();
 	
+	private boolean mSupportAnonymous = true;
+	
 	private static GoodsConfig mConfig = new GoodsConfig();
 	
 	private GoodsConfig()
@@ -181,4 +183,8 @@ public class GoodsConfig implements INetConfig {
 		return this.mLanTypeName;
 	}
 
+	public boolean getSupportAnonymous() 
+	{
+		return this.mSupportAnonymous;
+	}
 }

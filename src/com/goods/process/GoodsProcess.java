@@ -80,6 +80,7 @@ public class GoodsProcess extends BaseProcess {
 				// this.setCookie(COOKIE_LANGUAGE, this.mCurrentAccount.getLanguage());
 				super.setCurrentLanguage(this.mCurrentAccount.getLanguage());
 				mWebUtil.assign("isManager", mCurrentAccount.isManager());
+				mWebUtil.assign("isAnonymous", mCurrentAccount.getType().equals(AccountType.ANONYMOUS.name()));
 				mWebUtil.assign("current_account", mCurrentAccount.getAccount());
 				mWebUtil.assign("current_name", name);
 			}
@@ -197,6 +198,11 @@ public class GoodsProcess extends BaseProcess {
 					mCurrentAccount = accountTable.queryAccount(account);
 					NetLog.info(client, "Check account code success");
 				}
+				else if (GoodsConfig.instance().getSupportAnonymous())
+				{
+					mCurrentAccount = accountTable.createAnonymous(null, GoodsConfig.instance().getLangTypeName());
+					NetLog.info(client, "Create anonymous account");
+				}
 				else
 				{
 					NetLog.warning(client, "Check account code failed");
@@ -244,7 +250,15 @@ public class GoodsProcess extends BaseProcess {
 		else if (act.equals(MyConstant.COMMAND_MENU_SIGN_OUT))
 		{
 			this.deleteCookie(COOKIE_CODE);
-			this.location(String.format("login.html?act=%s", MyConstant.COMMAND_MENU_LOGIN));
+			
+			if (GoodsConfig.instance().getSupportAnonymous())
+			{
+				this.location(String.format("main_page.html?act=%s", MyConstant.COMMAND_MENU_MAIN_PAGE));
+			}
+			else
+			{
+				this.location(String.format("login.html?act=%s", MyConstant.COMMAND_MENU_LOGIN));
+			}
 		}
 		else if (act.equals(MyConstant.COMMAND_MENU_SHOW_SYSTEM_INFO))
 		{
