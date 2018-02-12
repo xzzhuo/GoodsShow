@@ -17,10 +17,15 @@ public abstract class BaseTable extends NetTable {
 	}
 
 	@Override
-	public void onInitTable() {
+	public void onAfterCreateTable(boolean isCreate, int upgrade) {
 
 	}
-	
+
+	@Override
+	public void onBeforeCreateTable() {
+
+	}
+
 	public long getCount()
 	{
 		long count  = 0;

@@ -34,7 +34,7 @@ public class AccountTable extends BaseTable {
 	}
 
 	@Override
-	public void onCreateTable(NetDatabase db) {
+	public boolean onCreateTable(NetDatabase db) {
 		
 		String sql = String.format("create table %s (", getTableName());
 		sql += "id INT NOT NULL AUTO_INCREMENT,";
@@ -65,11 +65,11 @@ public class AccountTable extends BaseTable {
 		sql += "reserve INT DEFAULT '0'";
 		sql += ") ENGINE=InnoDB DEFAULT CHARSET=UTF8";
 		
-		db.createTable(sql);
+		return db.createTable(sql);
 	}
 
 	@Override
-	public void onInitTable()
+	public void onAfterCreateTable(boolean isCreate, int upgrade)
 	{
 		createAdminAccount();
 		createGuestAccount();
